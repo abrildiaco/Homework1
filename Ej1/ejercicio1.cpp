@@ -15,7 +15,7 @@ vector<vector<int>> crear_matriz(const int n){
     return matriz;
 }
 
-void imprimir_matriz(vector<vector<int>> matriz, int size){
+void imprimir_matriz(vector<vector<int>> &matriz, int size){
     int fila = size-1;
     int columna = size-1;
     for (int n = size*size; n>0; n-- ){
