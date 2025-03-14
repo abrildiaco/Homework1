@@ -18,7 +18,14 @@
 using namespace std;
 
 int main(){
+    enum class Etiquetas {DEBUG, INFO, WARNING, ERROR, CRITICAL}
     string respuesta; 
-    cout<<"¿Desea registrar un evento? [si/no]: "<<;
+    cout<<"Ingrese el mensaje: ";
     cin >> respuesta;
+    string severidad;
+    cout<<"¿Cual es el nivel de severidad de su evento?\nIngrese:\nDEBUG
+            /INFO/WARNING/ERROR/CRITICAL";
+    cin>> severidad
+
+    
 }
