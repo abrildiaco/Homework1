@@ -15,17 +15,35 @@
 //[ERROR] <Mensaje> 
 
 #include <iostream>
+#include <string>
 using namespace std;
 
-int main(){
-    enum class Etiquetas {DEBUG, INFO, WARNING, ERROR, CRITICAL}
-    string respuesta; 
-    cout<<"Ingrese el mensaje: ";
-    cin >> respuesta;
-    string severidad;
-    cout<<"¿Cual es el nivel de severidad de su evento?\nIngrese:\nDEBUG
-            /INFO/WARNING/ERROR/CRITICAL";
-    cin>> severidad
 
+enum class Etiquetas {DEBUG, INFO, WARNING, ERROR, CRITICAL};
+string etiqueta_a_string(Etiquetas nivel) {
+    switch (nivel) {
+        case Etiquetas::DEBUG: return "DEBUG";
+        case Etiquetas::INFO: return "INFO";
+        case Etiquetas::WARNING: return "WARNING";
+        case Etiquetas::ERROR: return "ERROR";
+        case Etiquetas::CRITICAL: return "CRITICAL";
+        default: return "DESCONOCIDO";
+    }
+}
+
+int main(){
+    
+    string respuesta; 
+    cout <<"Ingrese el mensaje: "<<endl;
+    getline(cin, respuesta);
+    
+    int severidad;
+    cout<<"¿Cual es el nivel de severidad de su evento?\nIngrese el número corespondiente:\n0-DEBUG\n1-INFO\n2-WARNING\n3-ERROR\n4-CRITICAL"<<endl;
+    cin>> severidad;
+    
+    Etiquetas NivelSeveridad = static_cast<Etiquetas>(severidad);
+    cout << "Mensaje: " << respuesta << endl;
+    cout << etiqueta_a_string(NivelSeveridad);
+    return 0;
     
 }
