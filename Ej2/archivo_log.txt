@@ -2,3 +2,5 @@
 [INFO]<este mensaje es de prueba>
 [ERROR]<hay error en sistema>
 [NO EXISTE LA ETIQUETA]<hola como  va>
+[CRITICAL]<hola que tal>
+[DEBUG]<bueneas tardes>

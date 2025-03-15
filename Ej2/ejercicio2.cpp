@@ -38,7 +38,7 @@ string etiqueta_a_string(Etiquetas severidad) {
 
 void logMessage(string mensaje, Etiquetas NivelSeveridad){
     
-    ofstream outFile("archivo_log.txt", ios::app);
+    ofstream outFile("archivo_log.txt",ios::app);
     
     if (outFile.is_open()) {
      outFile <<"["<<etiqueta_a_string(NivelSeveridad)<<"]" << "<" << mensaje <<">\n";
@@ -74,6 +74,10 @@ void logMessage(string Mensaje_De_Acceso, string Nombre_de_Usuario, Etiquetas Ni
     } else
         cerr << "Error abriendo el archivo!\n";
     return;
+}
+
+void generar_error(){
+
 }
 
 int main(){
