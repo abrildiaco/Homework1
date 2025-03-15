@@ -1,0 +1,4 @@
+[WARNING]<falla logica>
+[INFO]<este mensaje es de prueba>
+[ERROR]<hay error en sistema>
+[NO EXISTE LA ETIQUETA]<hola como  va>
