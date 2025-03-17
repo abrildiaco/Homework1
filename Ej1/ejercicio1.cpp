@@ -3,6 +3,20 @@
 #include <vector>
 using namespace std;
 
+vector<vector<int>> crear_matriz(const int);
+
+void imprimir_matriz(vector<vector<int>>&, int);
+
+
+//Ejemplo con n=3
+int main(){
+    int n = 3;
+    vector<vector<int>> matriz =  crear_matriz(n);
+    imprimir_matriz(matriz, n);
+    return 0;
+}
+
+//Definicion de funciones
 vector<vector<int>> crear_matriz(const int n){
     int num = 1;
     vector<vector<int>> matriz(n, vector<int>(n, 0));
@@ -28,12 +42,4 @@ void imprimir_matriz(vector<vector<int>> &matriz, int size){
         else columna--;
     }
     return;
-}
-
-//Ejemplo con n=3
-int main(){
-    int n = 3;
-    vector<vector<int>> matriz =  crear_matriz(n);
-    imprimir_matriz(matriz, n);
-    return 0;
 }
