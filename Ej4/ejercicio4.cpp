@@ -1,27 +1,42 @@
-// Se requiere el código de una función recursiva que compare dos variables que 
-// contengan texto e indique mediante una variable bool si son iguales (true si son 
-// iguales, false si no lo son). Explique su elección entre los tipos string y char* (lea 
-// el siguiente item de este ejercicio antes de elegir el tipo de variable) y demuestre 
-// la funcionalidad de su código con un texto de, al menos, 64 caracteres. 
 #include <iostream>
 #include <chrono> 
 using namespace std;
 
-bool son_iguales(const char* p1, const char* p2){
+//bool son_iguales(const char* p1, const char* p2){
+//    //caso base
+//    if(*p1 == '\0' && *p2 == '\0') return true;
+//    if(*p1 != *p2) return false;
+//    //caso recursivo
+//    return son_iguales(p1+1, p2+1);
+//
+//}
+//elegi usar el tipo char* debido a que es más rapido en tiempo de ejecución que el tipo string
+
+
+//Modifique el código del ejercicio 4.1 para que la comparación de los textos se 
+//realice en tiempo de compilación y obtenga el tiempo de ejecución. Compare 
+//este tiempo con el obtenido en el ejercicio 4.2 y justifique brevemente la 
+//diferencia (puede escribir su conclusión como un comentario al final del código 
+//de este item). 
+
+//codigo modificado
+constexpr bool son_iguales(const char* p1, const char* p2){
     //caso base
     if(*p1 == '\0' && *p2 == '\0') return true;
     if(*p1 != *p2) return false;
+    
     //caso recursivo
     return son_iguales(p1+1, p2+1);
-
+    
 }
-//elegi usar el tipo char* debido a que es más rapido en tiempo de ejecución que el tipo string
 
 int main(){
     //ejemplo con cadenas distintas
-    const char *p1= "hola buenas noches como va, yo estoy muy bien ojala tengas un lindo dia";
-    const char *p2= "hola buena noches como va, yo estoy muy bien ojala tengas un lindo dia";
-    bool iguales = son_iguales(p1, p2);
+    constexpr const char p1[]= "hola buenas noches como va, yo estoy muy bien ojala tengas un lindo dia";
+    constexpr const char p2[]= "hola buena noches como va, yo estoy muy bien ojala tengas un lindo dia";
+    
+    constexpr bool iguales = son_iguales(p1, p2);
+    
     cout<<(iguales ? "true" : "false")<<endl;
     
     //medicion del tiempo
@@ -34,4 +49,3 @@ int main(){
     
     return 0;
 }
-
