@@ -2,15 +2,15 @@
 #include <chrono> 
 using namespace std;
 
-//bool son_iguales(const char* p1, const char* p2){
-//    //caso base
-//    if(*p1 == '\0' && *p2 == '\0') return true;
-//    if(*p1 != *p2) return false;
-//    //caso recursivo
-//    return son_iguales(p1+1, p2+1);
-//
-//}
-//elegi usar el tipo char* debido a que es más rapido en tiempo de ejecución que el tipo string
+bool son_iguales(const char* p1, const char* p2){
+    //caso base
+    if(*p1 == '\0' && *p2 == '\0') return true;
+    if(p1[0] != p2[0]) return false;
+    //caso recursivo
+    return son_iguales(p1+1, p2+1);
+
+}
+//egi usar el tipo char* debido a que es más rapido en tiempo de ejecución que el tipo string
 
 
 //Modifique el código del ejercicio 4.1 para que la comparación de los textos se 
@@ -20,7 +20,7 @@ using namespace std;
 //de este item). 
 
 //codigo modificado
-constexpr bool son_iguales(const char* p1, const char* p2){
+constexpr bool son_iguales_compilacion(const char* p1, const char* p2){
     //caso base
     if(*p1 == '\0' && *p2 == '\0') return true;
     if(*p1 != *p2) return false;
@@ -32,20 +32,33 @@ constexpr bool son_iguales(const char* p1, const char* p2){
 
 int main(){
     //ejemplo con cadenas distintas
-    constexpr const char p1[]= "hola buenas noches como va, yo estoy muy bien ojala tengas un lindo dia";
-    constexpr const char p2[]= "hola buena noches como va, yo estoy muy bien ojala tengas un lindo dia";
+    const char p1[]= "hola buenas noches como va, yo estoy muy bien ojala tengas un lindo dia";
+    const char p2[]= "hola buena noches como va, yo estoy muy bien ojala tengas un lindo dia";
     
-    constexpr bool iguales = son_iguales(p1, p2);
+    bool iguales = son_iguales(p1, p2);
     
     cout<<(iguales ? "true" : "false")<<endl;
     
     //medicion del tiempo
-    auto startTime = std::chrono::high_resolution_clock::now(); 
+    auto startTime = chrono::high_resolution_clock::now(); 
     son_iguales(p1, p2); 
-    auto endTime = std::chrono::high_resolution_clock::now(); 
-    auto elapsedTime = std::chrono::duration_cast<std::chrono::nanoseconds>( 
+    auto endTime = chrono::high_resolution_clock::now(); 
+    auto elapsedTime = chrono::duration_cast<std::chrono::nanoseconds>( 
     endTime - startTime); 
-    std::cout << "A son_iguales le tomó: " << elapsedTime.count() <<" nanosegundos" << std::endl;
+    std::cout << "A son_iguales le tomó: " << elapsedTime.count() <<" nanosegundos" << endl;
+
+    const char p3[]= "hola buenas noches como va, yo estoy muy bien ojala tengas un lindo dia";
+    const char p4[]= "hola buena noches como va, yo estoy muy bien ojala tengas un lindo dia";
     
+    bool iguales2 = son_iguales_compilacion(p3, p4);
+    cout<<(iguales2 ? "true" : "false")<<endl;
+
+    auto startTime2 = chrono::high_resolution_clock::now(); 
+    son_iguales_compilacion(p3, p4);
+    auto endTime2 = chrono::high_resolution_clock::now(); 
+    auto elapsedTime2 = chrono::duration_cast<std::chrono::nanoseconds>( 
+    endTime2 - startTime2); 
+    std::cout << "A son_iguales_compilacion le tomó: " << elapsedTime2.count() <<" nanosegundos" << endl;
+
     return 0;
 }
