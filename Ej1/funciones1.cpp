@@ -1,27 +1,6 @@
-
+#include "matriz.h"
 #include <iostream>
-#include <vector>
 using namespace std;
-
-vector<vector<int>> crear_matriz(const int);
-void imprimir_matriz(vector<vector<int>>&, int);
-
-
-//Ejemplo con n=3
-int main(){
-    const int n = 3;
-    vector<vector<int>> matriz =  crear_matriz(n);
-    imprimir_matriz(matriz, n);
-    return 0;
-}
-
-//g++ -std=c++20 ejercicio1.cpp -o ej1
-//./ej1
-
-//---------------------------------------------------------------------------------------------------
-
-
-//Definicion de funciones
 
 /*La funcion crear_matriz genera una matriz de tamaño n*n con el uso de la estructura "vector",
 la cual me permitió trabajar de manera mas ordenada y legible, sin tener que preocuparme por la
@@ -47,6 +26,7 @@ vector<vector<int>> crear_matriz(const int n){
     return matriz;
 }
 
+
 /*
 Para cumplir con la restricción de usar un único ciclo, implementé un for de rango n*n, 
 evitando así un doble bucle anidado.
@@ -58,7 +38,7 @@ permitiendo recorrer la nueva fila de derecha a izquierda.
 De este modo, consigo recorrer la matriz de abajo hacia arriba,
 imprimiendo cada valor con su posicion e iterar en un único ciclo*/
 
-void imprimir_matriz(vector<vector<int>> &matriz, int n){
+void imprimir_matriz(const vector<vector<int>> &matriz, int n){
     int fila = n-1;
     int columna = n-1;
     
