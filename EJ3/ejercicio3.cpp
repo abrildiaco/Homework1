@@ -1,24 +1,10 @@
-//Implemente una lista enlazada que utilice nodos que simplemente contengan un 
-//valor y una dirección de memoria de un nodo. Adicionalmente, agregue las siguientes 
-//funciones para manejar la lista: 
-//create_node(): devuelve un nodo. 
-//push_front(): inserta un nodo al frente de la lista. 
-//push_back(): inserta un nodo al final de la lista. 
-//insert(): inserta un nodo en la posición que se le pase a la función. Si se le pasa 
-//una posición mayor al largo de la lista, se debe indicar lo ocurrido y se debe de 
-//agregar el nodo al final de la lista. 
-//erase(): borra un nodo en la posición que se le pase a la función. Similar a la 
-//función insert(), si la posición es mayor que el largo de la lista, se debe de borrar 
-//el último nodo. 
-//print_list(): imprime la lista completa, separando el valor en cada nodo con “->”. 
-
-
 #include <memory>
 #include <iostream>
 using namespace std;
 
-//Definicion de estructuras
-struct Node{
+//Deficnicion de estructuras
+
+struct  Node{
     shared_ptr<Node> next;
     int value = 0;
 };
@@ -28,6 +14,40 @@ struct List{
     shared_ptr<Node> tail;
     int size=0;
 };
+
+shared_ptr<Node> create_node(const int);
+void push_front(const int, List&);
+void push_back(const int, List&);
+void insert(const int, int, List&);
+void erase(int, List&);
+void print_list(List&);
+
+//g++ -std=c++20 ejercicio3.cpp -o ej3
+//valgrind ./ej3
+
+int main() {
+    
+    List lista;
+    
+    int a = 10, b = 20, c = 30;
+    push_back(a, lista);
+    push_back(b, lista);
+    push_front(c, lista);
+    print_list(lista);
+    cout<<"\n"<<endl;
+    
+    insert(b, 10, lista);
+    print_list(lista);
+    cout<<"\n"<<endl;
+    
+    erase(10, lista);
+    print_list(lista);
+    cout<<"\n"<<endl;
+    
+    return 0;
+}
+
+//------------------------------------------------------------------------------------------------------------
 
 //Definicion de funciones
 
@@ -44,6 +64,7 @@ void push_front(const int value, List& lista){
     lista.head = new_node;
     if (!lista.tail) lista.tail = new_node;
     lista.size++;
+    cout<<"El valor "<<value<<" se insertó al principio"<<endl;
     return;
 }
 
@@ -57,6 +78,7 @@ void push_back(const int value, List& lista){
         lista.tail = new_node;
     }
     lista.size++;
+    cout<<"El valor "<<value<<" se insertó al final"<<endl;
     return;
 }
 
@@ -64,15 +86,20 @@ void insert(const int value, int i, List& lista){
     if (i>=lista.size) {
         cout<<"Posicion mayor al tamaño de la lista"<<endl;
         push_back(value, lista);
+        cout<<"El valor "<<value<<" se insertó al final"<<endl;
         return;
     }
     if (i == 0) {
         push_front(value, lista);
+        cout<<"El valor "<<value<<" se insertó en la posición "<<i<<endl;
         return;
     }
+    
     shared_ptr<Node> new_node = create_node(value);
     shared_ptr<Node> actual = lista.head;
+    
     int contador = 0;
+    
     while(contador < i-1 && actual->next){
         actual = actual->next;
         contador++;
@@ -80,19 +107,25 @@ void insert(const int value, int i, List& lista){
 
     new_node->next = actual->next;
     actual->next = new_node;
+    
     if (!new_node->next) lista.tail = new_node;
+    
     lista.size++;
-    return;
 
+    cout<<"El valor "<<value<<" se insertó en la posición "<<i<<endl;
+
+    return;
 }
 
 void erase(int i, List& lista){
     shared_ptr<Node> actual = lista.head;
     
-    if (!lista.head) {cout<<"Posicion mayor al tamaño de la lista"<<endl; return;}
+    if (!lista.head) {
+        cout<<"Posición mayor al tamaño de la lista"<<endl; 
+        return;}
     
     if (i>=lista.size) {
-        cout<<"Posicion mayor al tamaño de la lista"<<endl;
+        cout<<"Posición mayor al tamaño de la lista"<<endl;
         
         while(actual->next->next){
             actual = actual->next;
@@ -101,12 +134,14 @@ void erase(int i, List& lista){
         actual->next = nullptr;
         lista.tail = actual;
         lista.size--;
+        cout<<"El ultimo valor fue eliminado"<<endl;
         return;
     }
     if (i == 0) {
         lista.head = lista.head->next;
         if (!lista.head) lista.tail = nullptr;
         lista.size--;
+        cout<<"El valor en la posición "<<i<<" fue eliminado"<<endl;
         return;
     }
     
@@ -115,11 +150,18 @@ void erase(int i, List& lista){
         actual = actual->next;
         contador++;
     }
+    
     if (!actual->next) return;
 
     actual->next = actual->next->next;
+    
     if(!actual->next) lista.tail = actual;
+    
     lista.size--;
+
+    cout<<"El valor en la posición "<<i<<" fue eliminado"<<endl;
+
+
     return;
 }
 
@@ -131,24 +173,4 @@ void print_list(List& lista){
     }
     
     return;
-}
-
-int main() {
-    List lista;
-    int a = 10, b = 20, c = 30;
-    push_back(a, lista);
-    push_back(b, lista);
-    push_front(c, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    
-    insert(b, 10, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    
-    erase(10, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-
-    return 0;
 }
