@@ -29,23 +29,36 @@ int main() {
     
     List lista;
     
-    int a = 10, b = 20, c = 30;
-    push_back(a, lista);
-    push_back(b, lista);
-    push_front(c, lista);
+    push_back(10, lista);
     print_list(lista);
     cout<<"\n"<<endl;
     
-    insert(b, 10, lista);
+    push_back(20, lista);
     print_list(lista);
     cout<<"\n"<<endl;
     
-    erase(10, lista);
+    push_front(30, lista);
+    print_list(lista);
+    cout<<"\n"<<endl;
+    
+    insert(35, 1, lista);
+    print_list(lista);
+    cout<<"\n"<<endl;
+    
+    insert(15, 10, lista);
+    print_list(lista);
+    cout<<"\n"<<endl;
+    
+    erase(3, lista);
+    print_list(lista);
+    cout<<"\n"<<endl;
+    erase(11, lista);
     print_list(lista);
     cout<<"\n"<<endl;
     
     return 0;
 }
+
 
 //------------------------------------------------------------------------------------------------------------
 
@@ -86,12 +99,10 @@ void insert(const int value, int i, List& lista){
     if (i>=lista.size) {
         cout<<"Posicion mayor al tamaño de la lista"<<endl;
         push_back(value, lista);
-        cout<<"El valor "<<value<<" se insertó al final"<<endl;
         return;
     }
-    if (i == 0) {
+    else if (i == 0) {
         push_front(value, lista);
-        cout<<"El valor "<<value<<" se insertó en la posición "<<i<<endl;
         return;
     }
     
@@ -124,7 +135,7 @@ void erase(int i, List& lista){
         cout<<"Posición mayor al tamaño de la lista"<<endl; 
         return;}
     
-    if (i>=lista.size) {
+    else if (i>=lista.size) {
         cout<<"Posición mayor al tamaño de la lista"<<endl;
         
         while(actual->next->next){
@@ -137,7 +148,7 @@ void erase(int i, List& lista){
         cout<<"El ultimo valor fue eliminado"<<endl;
         return;
     }
-    if (i == 0) {
+    else if (i == 0) {
         lista.head = lista.head->next;
         if (!lista.head) lista.tail = nullptr;
         lista.size--;
@@ -146,7 +157,7 @@ void erase(int i, List& lista){
     }
     
     int contador = 0;
-    while(contador <= i-1 && actual->next){
+    while(contador < i-1 && actual->next){
         actual = actual->next;
         contador++;
     }
