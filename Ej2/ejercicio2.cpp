@@ -22,16 +22,95 @@
 #include <fstream>
 using namespace std;
 
-enum class Etiquetas {DEBUG, INFO, WARNING, ERROR, CRITICAL, SECURITY};
+enum class Etiquetas {DEBUG, INFO, WARNING, ERROR, CRITICAL, SECURITY, FATAL};
 
-string etiqueta_a_string(Etiquetas severidad) {
-    switch (severidad) {
+string etiqueta_a_string(Etiquetas);
+void logMessage(string, Etiquetas);
+void logMessage(string, string, int);
+void logMessage(string, string, Etiquetas);
+
+//g++ -std=c++20 ejercicio2.cpp -o ej2
+//./ej2
+
+
+int main(){
+
+    int evento_num;
+    cout<<"¿Cual es el tipo de evento a registrar?\nIngrese el número corespondiente:\n0-DEBUG\n1-INFO\n2-WARNING\n3-CRITICAL\n4-ERROR\n5-SECURITY\n6-FATAL"<<endl;
+    cin>> evento_num;
+    cin.ignore();
+    
+    Etiquetas evento_seleccionado = static_cast<Etiquetas>(evento_num);
+    
+    if(evento_num < 0 || evento_num > 6){ cout<<etiqueta_a_string(evento_seleccionado)<<" - Programa terminado"<<endl; return 1;}
+    
+    if (evento_num >= 0 && evento_num <= 3){
+        
+        string mensaje; 
+        cout <<"Ingrese el mensaje: "<<endl;
+        //cin>> mensaje;
+        //cin.ignore();
+        getline(cin, mensaje);
+        
+        logMessage(mensaje, evento_seleccionado);
+    
+    }else if (evento_num == 4){
+        
+        string mensaje; 
+        cout <<"Ingrese el mensaje de error: "<<endl;
+        //cin>> mensaje;
+        //cin.ignore();
+        getline(cin, mensaje);
+        
+        string archivo;
+        cout <<"Ingrese el nombre del archivo donde ocurrió el error: "<<endl;
+        //cin>> archivo;
+        //cin.ignore();
+        getline(cin, archivo);
+        
+        int linea_de_codigo;
+        cout <<"Ingrese el número de la línea de código: "<<endl;
+        cin>> linea_de_codigo;
+        //cin.ignore();
+        
+        logMessage(mensaje, archivo, linea_de_codigo);
+    
+    }else if (evento_num == 5){
+        
+        string mensaje; 
+        cout <<"Ingrese el mensaje de acceso: "<<endl;
+        //cin>> mensaje;
+        //cin.ignore();
+        getline(cin, mensaje);
+        
+        string usuario; 
+        cout <<"Ingrese su nombre de usuario: "<<endl;
+        cin>> usuario;
+        //cin.ignore();
+        //getline(cin, usuario);
+        
+        logMessage(mensaje, usuario, evento_seleccionado);
+    
+    }else{
+        //get_runetime_error();
+    }
+    
+    return 0;
+}
+
+//-----------------------------------------------------------------------------------------------
+
+// Definición de funciones
+
+string etiqueta_a_string(Etiquetas eventos) {
+    switch (eventos) {
         case Etiquetas::DEBUG: return "DEBUG";
         case Etiquetas::INFO: return "INFO";
         case Etiquetas::WARNING: return "WARNING";
-        case Etiquetas::ERROR: return "ERROR";
         case Etiquetas::CRITICAL: return "CRITICAL";
+        case Etiquetas::ERROR: return "ERROR";
         case Etiquetas::SECURITY: return "SECURITY";
+        case Etiquetas::FATAL: return "FATAL";
         default: return "NO EXISTE LA ETIQUETA";
     }
 }
@@ -41,9 +120,10 @@ void logMessage(string mensaje, Etiquetas NivelSeveridad){
     ofstream outFile("archivo_log.txt",ios::app);
     
     if (outFile.is_open()) {
-     outFile <<"["<<etiqueta_a_string(NivelSeveridad)<<"]" << "<" << mensaje <<">\n";
-     outFile.close();
-     cout << "Mensaje logeado\n";
+        outFile <<"["<<etiqueta_a_string(NivelSeveridad)<<"]" << "<" << mensaje <<">\n";
+        
+        outFile.close();
+        cout << "Mensaje logeado\n";
     
     } else
         cerr << "Error abriendo el archivo!\n";
@@ -54,59 +134,31 @@ void logMessage(string Mensage_de_Error, string Archivo, int Línea_de_Código){
     ofstream outFile("archivo_log.txt", ios::app);
     
     if (outFile.is_open()) {
-     outFile <<"[line:"<<Línea_de_Código<<"] " <<"["<<Archivo<<"]" << "<" <<  Línea_de_Código <<">\n";
-     outFile.close();
-     cout << "Mensaje logeado\n";
+        outFile <<"[line:"<<Línea_de_Código<<"] " <<"["<<Archivo<<"]" << "<" <<  Línea_de_Código <<">\n";
+     
+        outFile.close();
+        cout << "Mensaje logeado\n";
     
     } else
         cerr << "Error abriendo el archivo!\n";
     return;
 }
 
-void logMessage(string Mensaje_De_Acceso, string Nombre_de_Usuario, Etiquetas NivelSeveridad = Etiquetas::SECURITY){
+void logMessage(string Mensaje_De_Acceso, string Nombre_de_Usuario, Etiquetas NivelSeveridad){
     ofstream outFile("archivo_log.txt", ios::app);
     
     if (outFile.is_open()) {
-     outFile <<"["<<etiqueta_a_string(NivelSeveridad)<<"]" <<"["<<Nombre_de_Usuario<<"]" << "<" << Mensaje_De_Acceso <<">\n";
-     outFile.close();
-     cout << "Mensaje logeado\n";
+     
+        outFile <<"["<<etiqueta_a_string(NivelSeveridad)<<"]" <<"["<<Nombre_de_Usuario<<"]" << "<" << Mensaje_De_Acceso <<">\n";
+     
+        outFile.close();
+        cout << "Mensaje logeado\n";
     
     } else
         cerr << "Error abriendo el archivo!\n";
     return;
 }
 
-void generar_error(){
+void get_runetime_error(){
 
-}
-
-int main(){
-
-    string respuesta;
-    cout<<"¿Desea loguear un evento? [si/no]"<<endl;
-    cin>>respuesta;
-
-    while (respuesta == "si"){
-        
-        string mensaje; 
-        cout <<"Ingrese el mensaje: "<<endl;
-        cin.ignore();
-        getline(cin, mensaje);
-        
-        int severidad;
-        cout<<"¿Cual es el nivel de severidad de su evento?\nIngrese el número corespondiente:\n0-DEBUG\n1-INFO\n2-WARNING\n3-ERROR\n4-CRITICAL"<<endl;
-        cin>> severidad;
-        
-        Etiquetas NivelSeveridad = static_cast<Etiquetas>(severidad);
-
-        logMessage(mensaje, NivelSeveridad);
-        
-        cout<<"¿Desea loguear otro evento? [si/no]"<<endl;
-        cin>>respuesta;
-    }
-    
-    if (respuesta == "no"){cout<< "programa terminado"<<endl; return 0;}
-    else if (respuesta != "si"){cout<<"Respuesta desconocida"<<endl; return 1;}
-    
-    return 0;
 }
