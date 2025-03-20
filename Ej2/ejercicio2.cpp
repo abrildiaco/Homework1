@@ -41,58 +41,55 @@ int main(){
     cin.ignore();
     
     Etiquetas evento_seleccionado = static_cast<Etiquetas>(evento_num);
+
+    try{
+        
+        if(evento_num < 0 || evento_num > 6){ cout<<etiqueta_a_string(evento_seleccionado)<<" - Programa terminado"<<endl; return 1;}
+        
+        if (evento_num >= 0 && evento_num <= 3){
+
+            string mensaje; 
+            cout <<"Ingrese el mensaje: "<<endl;
+            getline(cin, mensaje);
+
+            logMessage(mensaje, evento_seleccionado);
+        
+        }else if (evento_num == 4){
+
+            string mensaje; 
+            cout <<"Ingrese el mensaje de error: "<<endl;
+            getline(cin, mensaje);
+
+            string archivo;
+            cout <<"Ingrese el nombre del archivo donde ocurrió el error: "<<endl;
+            getline(cin, archivo);
+
+            int linea_de_codigo;
+            cout <<"Ingrese el número de la línea de código: "<<endl;
+            cin>> linea_de_codigo;
+
+            logMessage(mensaje, archivo, linea_de_codigo);
+        
+        }else if (evento_num == 5){
+
+            string mensaje; 
+            cout <<"Ingrese el mensaje de acceso: "<<endl;
+            getline(cin, mensaje);
+
+            string usuario; 
+            cout <<"Ingrese su nombre de usuario: "<<endl;
+            cin>> usuario;
+
+            logMessage(mensaje, usuario, evento_seleccionado);
+        
+        }else{
+            throw runtime_error("FATAL ERROR");
+        }
     
-    if(evento_num < 0 || evento_num > 6){ cout<<etiqueta_a_string(evento_seleccionado)<<" - Programa terminado"<<endl; return 1;}
-    
-    if (evento_num >= 0 && evento_num <= 3){
-        
-        string mensaje; 
-        cout <<"Ingrese el mensaje: "<<endl;
-        //cin>> mensaje;
-        //cin.ignore();
-        getline(cin, mensaje);
-        
-        logMessage(mensaje, evento_seleccionado);
-    
-    }else if (evento_num == 4){
-        
-        string mensaje; 
-        cout <<"Ingrese el mensaje de error: "<<endl;
-        //cin>> mensaje;
-        //cin.ignore();
-        getline(cin, mensaje);
-        
-        string archivo;
-        cout <<"Ingrese el nombre del archivo donde ocurrió el error: "<<endl;
-        //cin>> archivo;
-        //cin.ignore();
-        getline(cin, archivo);
-        
-        int linea_de_codigo;
-        cout <<"Ingrese el número de la línea de código: "<<endl;
-        cin>> linea_de_codigo;
-        //cin.ignore();
-        
-        logMessage(mensaje, archivo, linea_de_codigo);
-    
-    }else if (evento_num == 5){
-        
-        string mensaje; 
-        cout <<"Ingrese el mensaje de acceso: "<<endl;
-        //cin>> mensaje;
-        //cin.ignore();
-        getline(cin, mensaje);
-        
-        string usuario; 
-        cout <<"Ingrese su nombre de usuario: "<<endl;
-        cin>> usuario;
-        //cin.ignore();
-        //getline(cin, usuario);
-        
-        logMessage(mensaje, usuario, evento_seleccionado);
-    
-    }else{
-        //get_runetime_error();
+    }catch(runtime_error &e){
+        logMessage(e.what(), evento_seleccionado);
+        cout << "Runtime error: " << e.what()<<endl;;
+        return 1;
     }
     
     return 0;
@@ -159,6 +156,6 @@ void logMessage(string Mensaje_De_Acceso, string Nombre_de_Usuario, Etiquetas Ni
     return;
 }
 
-void get_runetime_error(){
+void get_runtime_error(string mensaje){
 
 }

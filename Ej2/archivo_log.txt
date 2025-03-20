@@ -4,3 +4,6 @@
 [ERROR]<prueba critical>
 [line:45] [este_archivo]<45>
 [SECURITY][abrildiaco]<prueba acceso>
+[FATAL]<FATAL ERROR>
+[FATAL]<FATAL ERROR>
+[FATAL]<FATAL ERROR>
