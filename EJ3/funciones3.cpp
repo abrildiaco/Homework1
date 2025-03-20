@@ -1,66 +1,6 @@
-#include <memory>
+#include "lista.h"
 #include <iostream>
 using namespace std;
-
-//Deficnicion de estructuras
-
-struct  Node{
-    shared_ptr<Node> next;
-    int value = 0;
-};
-
-struct List{
-    shared_ptr<Node> head;
-    shared_ptr<Node> tail;
-    int size=0;
-};
-
-shared_ptr<Node> create_node(const int);
-void push_front(const int, List&);
-void push_back(const int, List&);
-void insert(const int, int, List&);
-void erase(int, List&);
-void print_list(List&);
-
-//g++ -std=c++20 ejercicio3.cpp -o ej3
-//valgrind ./ej3
-
-int main() {
-    
-    List lista;
-    
-    push_back(10, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    
-    push_back(20, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    
-    push_front(30, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    
-    insert(35, 1, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    
-    insert(15, 10, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    
-    erase(3, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    erase(11, lista);
-    print_list(lista);
-    cout<<"\n"<<endl;
-    
-    return 0;
-}
-
-
-//------------------------------------------------------------------------------------------------------------
 
 //Definicion de funciones
 
