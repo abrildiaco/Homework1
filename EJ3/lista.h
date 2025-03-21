@@ -3,7 +3,12 @@
 #include <memory>
 
 
-//Definicion de la estructura Node para valores enteros
+/*
+Definicion de la estructura Node para valores enteros.
+Los nodos fueron definidos con shared pointers pues hay nodos que apunntan a los mismos valores.
+Por ejemplo el puntero tail, apunta al mismo valor que el nodo previo al último. Esto no hubiese
+sido posible si se utilizaban unique pointers
+*/
 struct  Node{
     std::shared_ptr<Node> next;
     int value = 0;

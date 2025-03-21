@@ -5,17 +5,18 @@ using namespace std;
 //Definicion de funciones
 
 shared_ptr<Node> create_node(const int value){
-    shared_ptr<Node> new_node = make_shared<Node>();
-    new_node->next = nullptr;
-    new_node->value = value;
+    shared_ptr<Node> new_node = make_shared<Node>(); //se crea el nodo
+    new_node->value = value;//le asigno el valor
+    new_node->next = nullptr;  //le pido que su puntero a siguiente sea nulo como valor predeterminado
     return new_node;
 }
 
 void push_front(const int value, List& lista){
     shared_ptr<Node> new_node = create_node(value);
-    new_node->next = lista.head;
-    lista.head = new_node;
-    if (!lista.tail) lista.tail = new_node;
+    new_node->next = lista.head;//como inserto al principio, el nodo que era el head de lista, para a ser el siguiente de new_node
+    lista.head = new_node; //la head de mi lista ahora apunta a new_node
+    if (!lista.tail) lista.tail = new_node; //si no habia tail, significa que new_node es el único en la lista, 
+                                            //por ende, la cola de lista tambien apunta a él
     lista.size++;
     cout<<"El valor "<<value<<" se insertó al principio"<<endl;
     return;
@@ -23,9 +24,10 @@ void push_front(const int value, List& lista){
 
 void push_back(const int value, List& lista){
     shared_ptr<Node> new_node = create_node(value);
-    new_node->next = nullptr;
-    if (!lista.head) {
-        lista.head = lista.tail = new_node;
+    new_node->next = nullptr; //como se inserta al final, no tiene siguinte-->le asigno un puntero nulo
+    if (!lista.head) { // si no hay una cabeza de lista, new_node es el primero.
+        lista.head =  new_node;
+        lista.tail = new_node;
     } else {
         lista.tail->next = new_node;
         lista.tail = new_node;
