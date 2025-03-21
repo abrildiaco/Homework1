@@ -6,16 +6,6 @@ using namespace std;
 //g++ -std=c++20 main4.cpp funciones4.cpp -o main4
 //valgrind ./main4
 
-constexpr bool son_iguales_compilacion( const char* p1, const char* p2){
-    //caso base
-    if(*p1 == '\0' && *p2 == '\0') return true;
-    if(*p1 != *p2) return false;
-    
-    //caso recursivo
-    return son_iguales_compilacion(p1+1, p2+1);
-    
-}
-
 int main(){
     
     const char texto1[]= "Hola, bienevenidos al ejercicio 4 del Homework 1 de la materia Paradigmas de la Programacion";
