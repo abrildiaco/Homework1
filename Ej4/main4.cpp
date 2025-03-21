@@ -3,9 +3,6 @@
 #include <chrono> 
 using namespace std;
 
-//g++ -std=c++20 main4.cpp funciones4.cpp -o main4
-//valgrind ./main4
-
 int main(){
     
     cout<<"\nComparacion de textos en tiempo de ejecución:\n"<<endl;

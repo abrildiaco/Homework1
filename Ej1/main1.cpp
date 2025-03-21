@@ -8,6 +8,3 @@ int main(){
     imprimir_matriz(matriz, n);
     return 0;
 }
-
-//g++ -std=c++20 main1.cpp funciones1.cpp -o main1
-//./main1
