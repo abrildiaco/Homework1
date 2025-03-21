@@ -2,6 +2,8 @@
 
 #include <memory>
 
+
+//Definicion de la estructura Node para valores enteros
 struct  Node{
     std::shared_ptr<Node> next;
     int value = 0;
