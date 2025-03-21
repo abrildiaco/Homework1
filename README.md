@@ -1,6 +1,6 @@
 # HOMEWORK1
 
-En este repocitorio se encuentran las soluciones de los ejercicios del Homework1 de la materia Paradigmas de la Programacion.
+En este repositorio se encuentran las soluciones de los ejercicios del Homework1 de la materia Paradigmas de la Programacion.
 
 ## Archivos
 
@@ -10,12 +10,12 @@ Cada carpeta contiene tres archivos:
 
 --> Un archivo de funciones.cpp que contiene la definición de cada funcion
 
---> Un archivo main.cpp el cual contiene el código preincipal que deberá ser ejecutado
+--> Un archivo main.cpp el cual contiene el código principal que deberá ser ejecutado
 
 
 ## Compilacion
 
-A continuación, se dejan las intrucciones paar compilar acda archivo
+A continuación, se dejan las intrucciones para compilar cada ejercicio
 
 ### -Ej1:
 
