@@ -32,9 +32,14 @@ int main() {
     erase(3, lista);
     print_list(lista);
     cout<<"\n"<<endl;
+    
     erase(11, lista);
     print_list(lista);
     cout<<"\n"<<endl;
+
+    erase(2, lista);
+    print_list(lista);
+    cout<<"\n"<<endl;    
     
     return 0;
 }
