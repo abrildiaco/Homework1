@@ -34,16 +34,7 @@ int main(){
             cout <<"Ingrese el mensaje de error: "<<endl;
             getline(cin, mensaje);
 
-            string archivo;
-            cout <<"Ingrese el nombre del archivo donde ocurrió el error: "<<endl;
-            getline(cin, archivo);
-
-            int linea_de_codigo;
-            cout <<"Ingrese el número de la línea de código: "<<endl;
-            cin>> linea_de_codigo;
-            cin.ignore();
-
-            logMessage(mensaje, archivo, linea_de_codigo);
+            logMessage(mensaje, __FILE__, __LINE__);
         
         }else if (evento_num == 5){
 
@@ -62,8 +53,10 @@ int main(){
         }
     
     }catch(runtime_error &e){ //capturo el runtime error
+        
         logMessage(e.what(), evento_seleccionado);
         cout << "Runtime error: " << e.what()<<endl;; //e.what() devuelve el mensaje cargado en runtime_error()
+        
         return 1;
     }
     

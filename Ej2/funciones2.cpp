@@ -13,7 +13,9 @@ mensaje de error indicando que la etiqueta no existe.
 */
 
 string etiqueta_a_string(Etiquetas eventos) {
+    
     switch (eventos) {
+        
         case Etiquetas::DEBUG: return "DEBUG";
         case Etiquetas::INFO: return "INFO";
         case Etiquetas::WARNING: return "WARNING";
@@ -33,34 +35,39 @@ y agrega un mensaje con una etiqueta de severidad específica. Se utiliza la fun
 
 void logMessage(const string Mensaje, Etiquetas NivelSeveridad){
     
-    ofstream outFile("archivo_log.txt",ios::app); //abro/genro el archivo. Uso ios::app para no pisar lo que ya está escrito
+    //abro/genro el archivo. Uso ios::app para no pisar lo que ya está escrito
+    ofstream outFile("archivo_log.txt",ios::app); 
     
     if (outFile.is_open()) {
+        
         outFile <<"["<<etiqueta_a_string(NivelSeveridad)<<"]" << "<" << Mensaje <<">\n";
         
         outFile.close();
-        cout << "Mensaje logeado\n";
+        cout << "Mensaje logueado\n";
     
-    } else
-        cerr << "Error abriendo el archivo!\n";
+    } else cerr << "Error abriendo el archivo!\n";
+    
     return;
 }
 
 void logMessage(const string Mensaje_de_Error, const string Archivo, const int Línea_de_Código){
+    
     ofstream outFile("archivo_log.txt", ios::app);
     
     if (outFile.is_open()) {
+        
         outFile <<"[ERROR][line:"<<Línea_de_Código<<"]" <<"[archivo: "<<Archivo<<"]" << "<" <<  Mensaje_de_Error <<">\n";
      
         outFile.close();
-        cout << "Mensaje logeado\n";
+        cout << "Mensaje logueado\n";
     
-    } else
-        cerr << "Error abriendo el archivo!\n";
+    } else cerr << "Error abriendo el archivo!\n";
+    
     return;
 }
 
 void logMessage(const string Mensaje_De_Acceso, const string Nombre_de_Usuario){
+    
     ofstream outFile("archivo_log.txt", ios::app);
     
     if (outFile.is_open()) {
@@ -68,9 +75,9 @@ void logMessage(const string Mensaje_De_Acceso, const string Nombre_de_Usuario){
         outFile <<"[SECURITY]" <<"[usuario: "<<Nombre_de_Usuario<<"]" << "<" << Mensaje_De_Acceso <<">\n";
      
         outFile.close();
-        cout << "Mensaje logeado\n";
+        cout << "Mensaje logueado\n";
     
-    } else
-        cerr << "Error abriendo el archivo!\n";
+    } else cerr << "Error abriendo el archivo!\n";
+    
     return;
 }

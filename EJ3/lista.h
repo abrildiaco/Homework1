@@ -2,12 +2,13 @@
 
 #include <memory>
 
-
 /*
 Definicion de la estructura Node para valores enteros.
-Los nodos fueron definidos con shared pointers pues hay nodos que apunntan a los mismos valores.
+Los nodos fueron definidos con shared pointers pues puede darse el caso en el que dos nodos
+apunten a la misma direccion de memoria.
 Por ejemplo el puntero tail, apunta al mismo nodo que el previo al último. Esto no hubiese
-sido posible si se utilizaban unique pointers
+sido posible si se utilizaban unique pointers.
+Ademas, erl uso de mart pointer me aseguran un buen manejo de asignación y liberacion de memoria
 */
 struct  Node{
     std::shared_ptr<Node> next;
@@ -15,7 +16,7 @@ struct  Node{
 };
 
 /*
-DEfinición de la estructura List con puntero a head y a tail
+Definición una lista simplemente enlazada con puntero a head y a tail
 */
 struct List{
     std::shared_ptr<Node> head;
