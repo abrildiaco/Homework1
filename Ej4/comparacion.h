@@ -7,8 +7,9 @@ bool son_iguales(const char*, const char*);
 evitando errores de referencia*/
 
 constexpr bool son_iguales_compilacion(const char* p1, const char* p2){
+    
     //caso base
-    if(*p1 == '\0' && *p2 == '\0') return true;
+    if(*p1 == '\0' && *p2 == '\0') return true; //en una cadena de caracteres, hay un '\0' para indicar su fin
     if(*p1 != *p2) return false;
     
     //caso recursivo

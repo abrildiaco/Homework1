@@ -11,6 +11,7 @@ que tendrá la matriz, y devuelve un vector de vectores con elementos de tipo en
 */
 
 vector<vector<int>> crear_matriz(const int n){
+    
     int num = 1; 
     
     //creo una matriz de n vectores cada uno con n posiciones inicializadas en 0
@@ -18,7 +19,9 @@ vector<vector<int>> crear_matriz(const int n){
     
     //recorro las filas de la matriz y le asigno un valor "num" a cada posicion
     for (int i = 0; i<n; i++){
+        
         for (int j = 0; j<n; j++){
+            
             matriz[i][j] = num;
             num++;
         }
@@ -36,9 +39,11 @@ evitando así un doble bucle anidado.
 - Cuando columna == 0, se decrementa una fila y 'columna' se reinicia a n-1, 
 permitiendo recorrer la nueva fila de derecha a izquierda.
 De este modo, consigo recorrer la matriz de abajo hacia arriba,
-imprimiendo cada valor con su posicion e iterar en un único ciclo*/
+imprimiendo cada valor con su posicion e iterar en un único ciclo
+*/
 
 void imprimir_matriz(const vector<vector<int>> &matriz, int n){
+    
     int fila = n-1;
     int columna = n-1;
     
@@ -48,10 +53,12 @@ void imprimir_matriz(const vector<vector<int>> &matriz, int n){
         cout << "\n";
         
         if (columna == 0) { //condicion para cambiar a una fila menor
+            
             fila--;         //me muevo a una fila mas arriba
             columna = n-1; //como ahora estoy en una fila nueva, mis columnas vuelven a empezar en la posicion (n-1)
-        }
-        else columna--; //me muevo de columna hacia la izquierda
+        
+        }else columna--; //me muevo de columna hacia la izquierda
     }
+    
     return;
 }
